@@ -14,16 +14,53 @@ mongoose.connect("mongodb+srv://functionup-cohort:G0Loxqc9wFEGyEeJ@cluster0.rzot
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
 
-app.use (
-    function (req, res, next) {
-        console.log ("inside GLOBAL MW");
-        next();
-  }
-  );
+// app.use (
+//     function (req, res, next) {
+//         console.log ("inside GLOBAL MW");
+//         next();
+//   }
+//   );
 
-app.use('/', route);
+// app.use('/', route);
 
+
+// app.listen(process.env.PORT || 3000, function () {
+//     console.log('Express app running on port ' + (process.env.PORT || 3000))
+// });
+//=============================================================================================================
+
+
+const AlwaysCall=function(req,res,next){
+    var currentdate= new Date()
+    var datetime= currentdate.getDate()+" "
+                 currentdate.getMonth(+1)+ " "
+                 currentdate.getFullYear()+"  "
+                 currentdate.getHours()+" "
+                 currentdate.getMinutes()+ " "
+                 currentdate.getSeconds()+ " ";
+    let userIP=req.userIP
+    let url=req.originalUrl
+    console.log(            `${datetime} ${userIP} ${url}` )
+    next()
+
+}        ;
+app.use(AlwaysCall)
 
 app.listen(process.env.PORT || 3000, function () {
-    console.log('Express app running on port ' + (process.env.PORT || 3000))
-});
+      console.log('Express app running on port ' + (process.env.PORT || 3000))      
+});    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
