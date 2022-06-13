@@ -28,10 +28,10 @@
 const isFreeAppUser=function(req,res, next){
     let str=req.header['isFreeAppUser']
     console.log(str)
-    if( str==false||str==true){
-        res.send({Error:"isFreeAppUser is missing in header"})
-    }
+    if( str==true){
+        next();}
     else{
+        res.send({Error:"isFreeAppUser is missing in header"})
         next();
     }
 }
